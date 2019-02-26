@@ -4,7 +4,7 @@ import cv2
 import matplotlib.pyplot as plt
 
 
-def predict_ojects(prototxt, weights, image, conf):
+def find_faces(prototxt, weights, image, conf):
 
 	# Read Caffe model
 	model = cv2.dnn.readNetFromCaffe(prototxt, weights)
@@ -71,7 +71,7 @@ if __name__ == '__main__':
 	args = vars(parser.parse_args())
 
 	# Call object prediction method
-	predict_ojects(args['prototxt'], args['weights'], args['image'], args['confidence'])
+	find_faces(args['prototxt'], args['weights'], args['image'], args['confidence'])
 
 
 # Usage: python detect_faces.py --image images/people.jpg --prototxt deploy.prototxt.txt --weights res10_300x300_ssd_iter_140000.caffemodel --confidence 0.6
