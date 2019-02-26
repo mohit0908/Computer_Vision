@@ -17,7 +17,7 @@ def find_faces(prototxt, weights, conf):
 
 	while True:
 		frame = videostrean.read()
-		frame = imutils.resize(frame, width = 400)
+		frame = imutils.resize(frame, width = 800)
 		# Grab frame dimention and convert to blob
 		(h,w) =  frame.shape[:2]
 		# Preprocess input image: mean subtraction, normalization
