@@ -102,3 +102,8 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+
+# Folders to ignore
+./face_recognition_facenet
+./find_faces
