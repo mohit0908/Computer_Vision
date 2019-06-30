@@ -5,7 +5,7 @@ Blanket repository for basic computer vision tasks
 
 Explains how to apply NMS technique to suppress multiple bounding boxes into one.
 
-## face_detection_opencv
+## face_detection_dnn
 
 Face detection module build using cv2.dnn module and using pretrained Single Shot Detector (SSD) framework with a ResNet base network
 
