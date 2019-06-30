@@ -75,4 +75,5 @@ if __name__ == '__main__':
 	find_faces(args['prototxt'], args['weights'],args['confidence'])
 
 
-# Usage: python detect_faces_video.py --prototxt deploy.prototxt.txt --weights res10_300x300_ssd_iter_140000.caffemodel --confidence 0.6
+# Usage: 
+# python cam_detect_faces.py --prototxt models/deploy.prototxt.txt --weights models/res10_300x300_ssd.caffemodel --confidence 0.6

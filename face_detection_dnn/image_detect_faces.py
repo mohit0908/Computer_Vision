@@ -4,18 +4,22 @@ import cv2
 import matplotlib.pyplot as plt
 
 
-def find_faces(prototxt, weights, image, conf):
+def predict_ojects(prototxt, weights, image, conf):
 
 	# Read Caffe model
 	model = cv2.dnn.readNetFromCaffe(prototxt, weights)
 	# Read input image
 	input_img = plt.imread(image)
+	# input_img = np.expand_dims(input_img, axis = 0)
+	# print(input_img.shape)
+
 
 	(h,w) =  input_img.shape[:2]
 	# Preprocess input image: mean subtraction, normalization
 
 	blob = cv2.dnn.blobFromImage(cv2.resize(input_img, (300, 300)), 1.0,
 	(300, 300), (104.0, 177.0, 123.0))
+	# input_img = input_img.reshape(1,3,300,300)
 	
 	# Set read image as input to model
 
@@ -23,6 +27,7 @@ def find_faces(prototxt, weights, image, conf):
 
 	# Run forward pass on model. Receive output of shape (1,1,no_of_predictions, 7)
 	predictions = model.forward()
+	# print('predictions:', predictions.shape)
 
 	for i in range(0, predictions.shape[2]):
 		confidence = predictions[0,0,i,2]
@@ -31,6 +36,7 @@ def find_faces(prototxt, weights, image, conf):
 			# Find box coordinates rescaled to original image
 			box_coord = predictions[0,0,i,3:7] * np.array([w,h,w,h])
 			conf_text = '{:.2f}'.format(confidence)
+			# print(conf_text)
 			# Find output coordinates
 			xmin, ymin, xmax, ymax = box_coord.astype('int')
 			print('confidence:', confidence*100)
@@ -65,7 +71,8 @@ if __name__ == '__main__':
 	args = vars(parser.parse_args())
 
 	# Call object prediction method
-	find_faces(args['prototxt'], args['weights'], args['image'], args['confidence'])
+	predict_ojects(args['prototxt'], args['weights'], args['image'], args['confidence'])
 
 
-# Usage: python detect_faces.py --image images/people.jpg --prototxt deploy.prototxt.txt --weights res10_300x300_ssd_iter_140000.caffemodel --confidence 0.6
+# Usage: 
+# python image_detect_faces.py --image images/people.jpg --prototxt models/deploy.prototxt.txt --weights models/res10_300x300_ssd.caffemodel --confidence 0.6
